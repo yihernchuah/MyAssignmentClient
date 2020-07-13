@@ -1,0 +1,58 @@
+<h1 class="text-center mb-3">{{title}}</h1>
+<form action="/api/movies" method="POST" class="mb-4">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" name="title" class="form-control">
+    </div>
+    <input type="submit" value="Add Movie" class="btn btn-danger btn-block">
+</form>
+<br>
+
+<div id="error" style="color: red; text-align:center">
+    <h5> {{messages.error}}</h5>
+</div>
+
+<div id="success" style="color: green; text-align:center">
+    <h5> {{messages.success}}</h5>
+</div>
+<br><br>
+
+<h4>My Movie Collection</h4>
+<ul class="list-group">
+
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Runtime</th>
+                    <th>Release Date</th>
+                    <th>Vote Count</th>
+                    <th>Vote Average</th>
+                    <th>Poster</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each movies}}
+                <tr>
+                    <td>
+                        <form action='/api/movies/delete/{{this.id}}' method="POST">
+                            <button class="btn btn-danger" id="delete" type="submit">Delete</button>
+                        </form>
+                    </td>
+                    <td>{{this.title}}</td>
+                    <td>{{this.year}}</td>
+                    <td>{{this.runtime}}</td>
+                    <td>{{this.released}}</td>
+                    <td>{{this.vote_count}}</td>
+                    <td>{{this.vote_average}}</td>
+                    <td><img src='{{this.poster}}' width='100' alt='{{this.title}}' /></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</ul>
+<br><br><br><br><br>
